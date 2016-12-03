@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Test</title>
-</head>
-<body>
-<?php echo "欢迎进入PHP世界!"; ?>
-<p>
-<a href="do/test.php">Test</a>
-</p>
-</body>
-</html>
+<?php  
+/**
+ * 入口文件
+ *
+ */
+require dirname(__FILE__).'system/app.php';
+require dirname(__FILE__).'config/config.php';
+Application::run($CONFIG);
