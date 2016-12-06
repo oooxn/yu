@@ -48,7 +48,10 @@ final class Application {
 		//初始化cache
 		if (is_object(self::$_lib['cache'])) {
 			self::$_lib['cache']->init(
-				''
+				ROOT_PATH.'/'.self::$_config['cache']['cache_dir'],
+				self::$_config['cache']['cache_prefix'],
+				self::$_config['cache']['cache_time'],
+				self::$_config['cache']['cache_mode']
 			);
 		}
 	}
@@ -64,5 +67,48 @@ final class Application {
 			'cache'     => SYS_LIB_PATH.'/lib_cahce.php',
 			'thumbnail' => SYS_LIB_PATH.'lib_thumbnail.php'
 		);
+	}
+
+	/**
+	 * 根据URL分发到Controller和Model
+	 * @access public
+	 * @param  array $url_array
+	 */
+	public static function routeToCm($url_array = array()) {
+		$app = '';
+		$controller = '';
+		$action = '';
+		$model = '';
+		$params = '';
+
+		if (isset($url_array['app'])) {
+			$app = $url_array['app'];
+		}
+
+		if (isset($url_array['controller'])) {
+			$controller = $model = $url_array['controller'];
+			if ($app) {
+				$controller_file = CONTROLLER_PATH.'/'.$app.$controller.'Controller.php';
+				$model_file = MODEL_PATH.'/'.$app.'/'.$model.'Model.php';
+			} else {
+				$controller_file = CONTROLLER_PATH.'/'.$controller.'Controller.php';
+				$model_file = MODEL_PATH.'/'.$model.'Model.php';
+			}
+		} else {
+			$controller = $model = self::$_config['route']['default_controller'];
+			if ($app) {
+				$controller_file = CONTROLLER_PATH.'/'.$app.'/'.$controller.'Controller.php';
+				$model_file = MODEL_PATH.'/'.$app.'/'.$model.'Model.php';
+			} else {
+				$controller_file = CONTROLLER_PATH.'/'.$controller.'Controller.php';
+				$model_file = MODEL_PATH.'/'.$model.'Model.php';
+			}
+		}
+
+		if (isset($url_array['action'])) {
+			$action = $url_array['action'];
+		} else {
+			$action = self::$_config['route']['default_action'];
+		}
 	}
 }
