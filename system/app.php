@@ -1,7 +1,7 @@
 <?php
 /**
  * 应用驱动类
- *
+ * @date 2016-12-7
  */
 define('SYSTEM_PATH', dirname(__FILE__));
 define('ROOT_PATH', substr(SYSTEM_PATH, 0,-7));
