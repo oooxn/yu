@@ -1,7 +1,11 @@
 <?php
 /**
  * 应用驱动类
+<<<<<<< HEAD
  *
+=======
+ * @date 2016-12-7
+>>>>>>> c298b705fe79a1a42192702f6c345ca7fc773996
  */
 define('SYSTEM_PATH', dirname(__FILE__));
 define('ROOT_PATH', substr(SYSTEM_PATH, 0,-7));
