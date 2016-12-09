@@ -32,4 +32,59 @@ final class Route{
 		$this->makeUrl();
 		return $this->route_url;
 	}
+
+	/**
+	 * @access public 
+	 */
+	public function makeUrl() {
+		switch ($this->url_type) {
+			case 1:
+				$this->queryToArray();
+				break;
+			
+			case 2:
+				$this->pathinfoToArray();
+				break;
+		}
+	}
+
+	/**
+	 * 将query形式的URL转化为数组
+	 * @access public
+	 */
+	public function queryToArray() {
+		$arr = !empty($this->url_query['query']) ? explode('&', $this->url_query['query']) : array();
+		$array = $tmp = array();
+		if (count($arr) > 0) {
+			foreach ($arr as $item) {
+				$tmp = explode('=', $item);
+				$array[$tmp[0]] = $tmp[1];
+			}
+			if (isset($array['app'])) {
+				$this->route_url['app'] = $array['app'];
+				unset($array['app']);
+			}
+			if (isset($array['controller'])) {
+				$this->route_url['controller'] = $array['controller'];
+				unset($array['controller']);
+			}
+			if (isset($array['action'])) {
+				$this->route_url['action'] = $array['action'];
+				unset($array['action']);
+			}
+			if (count($array) > 0) {
+				$this->route_url['params'] = $array;
+			}
+		} else {
+			$this->route_url = array();
+		}
+	}
+
+	/**
+	 * 将PATH_INFO的URL形式转化数组[后续实现]
+	 * @access public
+	 */
+	public function pathinfoToArray() {
+
+	}
 }
