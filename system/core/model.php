@@ -4,5 +4,5 @@
  * @date 2016-12-9
  */
 class Model {
-	
+	 protected $db = null;
 }
