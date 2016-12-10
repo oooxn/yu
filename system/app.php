@@ -11,7 +11,7 @@ define('SYS_CORE_PATH', SYSTEM_PATH.'/core');
 define('CONTROLLER_PATH', ROOT_PATH.'/controller');
 define('MODEL_PATH', ROOT_PATH.'/model');
 define('VIEW_PATH', ROOT_PATH.'/view');
-define('LOG_PATH'.ROOT_PATH.'/error/');
+define('LOG_PATH', ROOT_PATH.'/error/');
 final class Application {
 	public static $_lib = null;
 	public static $_config = null;
@@ -63,9 +63,9 @@ final class Application {
 		self::$_lib = array(
 			'route'     => SYS_LIB_PATH.'/lib_route.php',
 			'mysql'     => SYS_LIB_PATH.'/lib_mysql.php',
-			'template'  => SYS_LIB_PATH.'/lib_template/php',
-			'cache'     => SYS_LIB_PATH.'/lib_cahce.php',
-			'thumbnail' => SYS_LIB_PATH.'lib_thumbnail.php'
+			'template'  => SYS_LIB_PATH.'/lib_template.php',
+			'cache'     => SYS_LIB_PATH.'/lib_cache.php',
+			'thumbnail' => SYS_LIB_PATH.'/lib_thumbnail.php'
 		);
 	}
 
@@ -109,6 +109,30 @@ final class Application {
 			$action = $url_array['action'];
 		} else {
 			$action = self::$_config['route']['default_action'];
+		}
+
+		if (isset($url_array['params'])) {
+			$params = $url_array['params'];
+		}
+
+		if (file_exists($controller_file)) {
+			if (file_exists($model_file)) {
+				require $model_file;
+			}
+			require $controller_file;
+			$controller = $controller.'Controller';
+			$controller = new $controller;
+			if ($action) {
+				if (method_exists($controller, $action)) {
+					isset($params) ? $controller->$action($params) : $controller-> $action();
+				} else {
+					die('控制器方法不存在');
+				}
+			} else {
+				die('控制器方法不存在');
+			}
+		} else {
+			die('控制器不存在');
 		}
 	}
 }
