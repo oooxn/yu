@@ -8,7 +8,7 @@
  		parent::__construct();
  	}
  	public function index() {
- 		$data['test'] = '111111';
+ 		$data['test'] = getTest();
  		$this->showTemplate('test',$data);
  	}
  }
