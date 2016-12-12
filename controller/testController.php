@@ -3,12 +3,15 @@
  * 测试控制器
  *
  */
- class testController extends Controller {
- 	public function __construct() {
- 		parent::__construct();
- 	}
+
+class testController extends baseController{
+
  	public function index() {
  		$data['test'] = getTest();
- 		$this->showTemplate('test',$data);
+ 		$data2['aaa'] = 111111111;
+
+ 		$this->assign('aaa',$data2);
+ 		$this->assign('niu',$data);
+ 		$this->showTemplate('test');
  	}
  }

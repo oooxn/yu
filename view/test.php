@@ -4,6 +4,7 @@
 	<title></title>
 </head>
 <body>
-这是<?php echo $test; ?>,哈哈哒
+这是<?php echo $niu['test']; ?>,哈哈哒
+<?php echo $aaa['aaa'];?>
 </body>
 </html>

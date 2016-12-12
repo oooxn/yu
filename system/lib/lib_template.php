@@ -5,9 +5,8 @@ final class Template {
 	public $data = array();
 	public $out_put = null;
 
-	public function init($template_name, $data = array()) {
+	public function init($template_name) {
 		$this->template_name = $template_name;
-		$this->data = $data;
 		$this->fetch();
 	}
 	/**
@@ -36,6 +35,14 @@ final class Template {
 	 */
 	public function outPut() {
 		echo $this->out_put;
+	}
+
+	/**
+	 * 模板赋值
+	 * @access public
+	 */
+	public function assign($name, $data) {
+		$this->data[$name] = $data;
 	}
 
 }
