@@ -4,6 +4,8 @@
  * @date 2016-12-9
  */
 class Controller {
+
+	protected $template = null;
 	public function __construct() {
 		// header('Content-type:text/html;chartset=utf-8');
 	}
@@ -48,10 +50,24 @@ class Controller {
 	 * @param  string $path  模板路径
 	 * @return string 模板字符串
 	 */
-	final protected function showTemplate($path, $data = array()) {
-		$template = $this->load('template');
-		$template->init($path,$data);
-		$template->outPut();
+	final protected function showTemplate($path) {
+		if (is_null($this->template)) {
+			$this->template = $this->load('template');
+		}
+		$this->template->init($path);
+		$this->template->outPut();
+	}
+	/**
+	 * 给模板赋值
+	 * @access final protected
+	 * @param  string $name  模板字符名
+	 * @param  array  $data  赋值数组
+	 */
+	final protected function assign($name, $data) {
+		if (is_null($this->template)) {
+			$this->template = $this->load('template');
+		}
+		$this->template->assign($name, $data);
 	}
 
 }
