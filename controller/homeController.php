@@ -8,7 +8,7 @@ class homeController extends baseController {
 	 * 首页
 	 */
 	public function index() {
-		M('test');
+		M('test')->query();
 		$this->showTemplate('home');
 	}
 }
