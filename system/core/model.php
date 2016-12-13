@@ -14,8 +14,7 @@ class Model {
 	 		$config_db['db_host'],
 	 		$config_db['db_user'],
 	 		$config_db['db_password'],
-	 		$config_db['db_conn'],
-	 		$config_db['db_charset']
+	 		$config_db['db_database']
 	 	);
 	 }
 
@@ -52,5 +51,14 @@ class Model {
 	  */
 	 final protected function config($config = '') {
 	 	return Application::$_config[$config];
+	 }
+
+	 /**
+	  * 查询语句
+	  * @access public
+	  * @param  string  $sql
+	  */
+	 public function query($sql) {
+	 	return $this->db->query($sql);
 	 }
 }
