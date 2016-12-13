@@ -12,6 +12,23 @@ define('CONTROLLER_PATH', ROOT_PATH.'/controller');
 define('MODEL_PATH', ROOT_PATH.'/model');
 define('VIEW_PATH', ROOT_PATH.'/view');
 define('LOG_PATH', ROOT_PATH.'/error/');
+
+
+/**
+ * 自动加载类库|系统函数
+ * @param  string  $className
+ */
+function __autoload($className) {
+	if (substr($className,-10) === 'Controller') {  //加载控制器
+		require_once CONTROLLER_PATH.'/'.$className.'.php';
+	} elseif (substr($className, -5) === 'Model') {
+		require_once MODEL_PATH.'/'.$className.'.php';
+	}
+}
+
+/**
+ * 入口类
+ */
 final class Application {
 	public static $_lib = null;
 	public static $_config = null;
@@ -35,7 +52,7 @@ final class Application {
 		self::routeToCm($url_array);
 	}
 	/**
-	 * 自动加载类库
+	 * 加载类库
 	 * @access public
 	 * @param  array   $_lib
 	 */
