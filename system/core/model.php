@@ -5,9 +5,14 @@
  */
 class Model {
 	 protected $db = null;
+	 protected $tbname;
 
-	 final public function __construct() {
+	 final public function __construct($tbname) {
 	 	header('Content-type:text/html;chartset=utf-8');
+	 	if (empty($tbname)) {
+	 		trigger_error('表名不能为空');
+	 	}
+	 	$this->tbname = $this->table($tbname);
 	 	$this->db = $this->load('mysql');
 	 	$config_db = $this->config('db');
 	 	$this->db->init(
@@ -59,6 +64,7 @@ class Model {
 	  * @param  string  $sql
 	  */
 	 public function query($sql) {
+	 	$sql = str_replace('db_table_name_re', $this->tbname, $sql);
 	 	return $this->db->query($sql);
 	 }
 }
