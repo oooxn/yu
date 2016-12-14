@@ -8,7 +8,7 @@ class homeController extends baseController {
 	 * 首页
 	 */
 	public function index() {
-		M('test')->query();
+		$data = M('user')->where(array('id'=>1))->find();
 		$this->showTemplate('home');
 	}
 }

@@ -10,12 +10,16 @@ final class Mysql {
 	protected $PDOStatement;
 
 	public function init($host, $username, $password, $dbname = 'test', $port = 3306) {
-		$dsn = 'mysql:dbname='.$dbname.';host='.$host;
+		$dsn = 'mysql:dbname='.$dbname.';host='.$host.';port='.$port;
+		$conn = null;
 		try {
-			$this->_result = new PDO($dsn, $username, $password);
+			$conn = new PDO($dsn, $username, $password);
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		} catch(PDOException $e) {
 			echo $e->getMessage();
 		}
+
+		$this->_result = $conn;
 		
 	}
 

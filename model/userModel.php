@@ -3,6 +3,6 @@
  * 测试model类
  * @date 2016-12-13
  */
-class testModel extends baseModel {
+class userModel extends baseModel {
 
 }

@@ -15,5 +15,24 @@ function getTest() {
  */
 function M($modelName) {
 	$model = $modelName.'Model';
-	return new $model;
+	return new $model($modelName);
+}
+
+/**
+ * 获取配置值 | 多重用'.'链接
+ * @param string $configName 例：db.db_host
+ */
+function C($configName) {
+	$configNameArr = explode('.', $configName);
+	$configAll = Application::$_config;
+	foreach ($configNameArr as $key => $value) {
+		$configAll = $configAll[$value];
+	}
+
+	if (!empty($configAll)) {
+		return $configAll;
+	} else {
+		return '';
+	}
+
 }
