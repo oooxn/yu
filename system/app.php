@@ -12,6 +12,7 @@ define('CONTROLLER_PATH', ROOT_PATH.'/controller');
 define('MODEL_PATH', ROOT_PATH.'/model');
 define('VIEW_PATH', ROOT_PATH.'/view');
 define('LOG_PATH', ROOT_PATH.'/error/');
+define('IMG_PATH', ROOT_PATH.'/resource/image/');
 
 
 /**
