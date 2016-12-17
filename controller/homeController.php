@@ -8,7 +8,17 @@ class homeController extends baseController {
 	 * 首页
 	 */
 	public function index() {
-		$data = M('user')->where(array('id'=>1))->find();
+		if (!empty($_POST)) {
+			$account  = $_POST['account'];
+			$password = $_POST['password'];
+
+			$data = M('user')->where(array('id'=>1))->find();
+
+			if ($data['name'] == trim($account) && $data['password'] == $password) {
+				echo '登录成功';die;
+			}
+		}
+		
 		$this->showTemplate('home');
 	}
 }

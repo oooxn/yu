@@ -36,6 +36,7 @@ class baseModel extends Model {
 			$sql = 'select * from db_table_name_re';
 		}
 
-		return $this->query($sql);
+		$data = $this->query($sql);
+		return current($data);die;
 	}
 }
