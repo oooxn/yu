@@ -99,7 +99,7 @@ form {
 		<div class="desk-front sign-flow clearfix sign-flow-simple">
 
 			<div class="view view-signin">
-				<form method="POST" action="">
+				<form method="POST" action="index.php">
 					<input type="hidden" name="_xsrf" value=""/>
 						<div class="group-inputs">
 
