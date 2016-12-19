@@ -5,8 +5,22 @@
 
 
 
-function getTest() {
-	return 'niuwenyu';
+/**
+ * 检查和设置登录
+ * @param string $user_id
+ */
+function L($user_id = '') {
+	$session_key = 'login_user_session';
+	if (empty($user_id)) {
+		if (empty($_SESSION[$session_key])) {
+			return false;
+		} else {
+			return $_SESSION[$session_key];
+		}
+	} else {
+		$_SESSION[$session_key] = $user_id;
+		return true;
+	}
 }
 
 /**
