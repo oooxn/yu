@@ -7,11 +7,15 @@
 class testController extends baseController{
 
  	public function index() {
- 		$data['test'] = getTest();
- 		$data2['aaa'] = 111111111;
+ 		echo '测试Mysql的单例模式效率';
+ 		echo "</BR>";
+ 		echo '1:测试查询'."</BR>";
+ 		$startTime = microtime(true);
+ 		for ($i=0; $i < 10000; $i++) { 
+ 			$data = M('user')->where(array('id'=>1))->find();
+ 		}
+ 		echo $i.'次耗时：'.(microtime(true)-$startTime);
 
- 		$this->assign('aaa',$data2);
- 		$this->assign('niu',$data);
- 		$this->showTemplate('test');
+ 		die;
  	}
  }

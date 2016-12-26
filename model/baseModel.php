@@ -27,8 +27,11 @@ class baseModel extends Model {
 
 	/**
 	 * find
+	 * @param  string $field 查询字段
+	 * @param  bool   $is_select 是否为多条查询
+	 * @return array
 	 */
-	public function find() {
+	public function find($field = '', $is_select = false) {
 		$sql = '';
 		if (!empty($this->condition)) {
 			$sql = 'select * from db_table_name_re where '. $this->condition;
@@ -37,6 +40,11 @@ class baseModel extends Model {
 		}
 
 		$data = $this->query($sql);
-		return current($data);die;
+		return current($data);
 	}
+
+	/**
+	 * select
+	 * 
+	 */
 }
